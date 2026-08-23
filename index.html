@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kalau Waktu Mau Mengulang Lagi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ===== SPLASH SCREEN ===== -->
+  <div class="splash-screen" id="splashScreen">
+    <div class="splash-bg"></div>
+    <div class="splash-particles" id="splashParticles"></div>
+    <div class="splash-content">
+      <div class="splash-icon">💌</div>
+      <h1 class="splash-title">Kalau Waktu Mau<br>Mengulang Lagi</h1>
+      <p class="splash-subtitle">sebuah album kenangan untukmu</p>
+      <button class="splash-btn" id="splashBtn" onclick="enterSite()">
+        <span class="splash-btn-icon">▶</span>
+        <span>Mulai dengan Musik</span>
+      </button>
+      <p class="splash-hint">♪ pastikan volume menyala</p>
+    </div>
+  </div>
+
+  <!-- ===== AUDIO CONTROL ===== -->
+  <div class="audio-control" id="audioControl">
+    <div class="music-player" id="musicPlayer">
+      <button class="music-toggle-btn" id="musicToggleBtn" onclick="toggleAudio()" title="Toggle Music">
+        <span class="music-vinyl" id="musicVinyl">
+          <span class="vinyl-dot"></span>
+        </span>
+        <span class="music-info">
+          <span class="music-title-label" id="musicTitleLabel">Piano Memories</span>
+          <span class="music-status" id="musicStatus">Click to play ♪</span>
+        </span>
+        <span class="music-play-icon" id="musicPlayIcon">▶</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ===== HIDDEN YOUTUBE PLAYER ===== -->
+  <div id="ytPlayerWrapper" style="position:fixed;top:-9999px;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;">
+    <div id="ytPlayer"></div>
+  </div>
+
+  <!-- ===== FLOATING PARTICLES ===== -->
+  <div class="particles-container" id="particles"></div>
+
+  <!-- ===== LETTER TRANSITION OVERLAY ===== -->
+  <div class="letter-overlay" id="letterOverlay">
+    <div class="letter-envelope" id="letterEnvelope">
+      <div class="envelope-body">
+        <div class="envelope-flap" id="envelopeFlap"></div>
+        <div class="envelope-paper" id="envelopePaper">
+          <p class="envelope-text" id="envelopeText"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== BOOK WRAPPER ===== -->
+  <div class="book-wrapper" id="bookWrapper">
+
+    <!-- ===== COVER PAGE ===== -->
+    <section class="page cover-page active" id="cover">
+      <div class="cover-bg"></div>
+      <div class="cover-content">
+
+        <div class="polaroid-cluster">
+          <div class="polaroid polaroid-left">
+            <div class="polaroid-photo" id="polaroid1">
+              <img src="photos/memory1.jpeg" alt="Memory 1" class="polaroid-img" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder photo1\'><span class=\'photo-icon\'>📷</span><div class=\'photo-overlay-text\'>Memory 1</div></div>'" />
+            </div>
+            <p class="polaroid-caption">sweet moments</p>
+          </div>
+          <div class="polaroid polaroid-center">
+            <div class="polaroid-photo" id="polaroid2">
+              <img src="photos/memory2.jpeg" alt="Memory 2" class="polaroid-img" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder photo2\'><span class=\'photo-icon\'>🌸</span><div class=\'photo-overlay-text\'>Memory 2</div></div>'" />
+            </div>
+            <p class="polaroid-caption">always remember</p>
+          </div>
+          <div class="polaroid polaroid-right">
+            <div class="polaroid-photo" id="polaroid3">
+              <img src="photos/memory3.jpg" alt="Memory 3" class="polaroid-img" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder photo3\'><span class=\'photo-icon\'>✨</span><div class=\'photo-overlay-text\'>Memory 3</div></div>'" />
+            </div>
+            <p class="polaroid-caption">never forget</p>
+          </div>
+        </div>
+
+        <div class="cover-text">
+          <h1 class="cover-title">"Some memories never really leave us."</h1>
+          <p class="cover-subtitle">
+            Mungkin waktu terus berjalan, tapi ada beberapa momen yang diam-diam masih ingin aku ulang lagi.
+          </p>
+          <button class="btn-primary open-album-btn" onclick="openAlbum()">
+            <span class="btn-icon">📖</span>
+            Open The Album
+          </button>
+        </div>
+
+      </div>
+      <div class="cover-petals"></div>
+    </section>
+
+    <!-- ===== PAGE 1 — THE BEGINNING ===== -->
+    <section class="page memory-page" id="page1">
+      <div class="page-bg page1-bg"></div>
+      <div class="page-content">
+
+        <div class="page-number">01 / 03</div>
+
+        <div class="memory-layout">
+          <div class="memory-photo-side">
+            <div class="memory-polaroid">
+              <div class="memory-photo-frame">
+                <img src="photos/memory1.jpeg" alt="Awal Cerita" class="memory-img" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder memory-photo1\'><span class=\'photo-icon large\'>📷</span><div class=\'photo-overlay-text\'>Awal Cerita</div></div>'" />
+              </div>
+              <p class="memory-photo-label">the beginning ✦</p>
+            </div>
+          </div>
+          <div class="memory-text-side">
+            <div class="memory-tag">Chapter I</div>
+            <h2 class="memory-title">"Awal Cerita Kita"</h2>
+            <div class="memory-divider">
+              <span>✦</span>
+            </div>
+            <p class="memory-body">
+              Aku masih ingat waktu semuanya terasa sederhana. Kita ngobrol tanpa banyak beban, bercanda tentang hal-hal yang bahkan sekarang mungkin sudah lupa. Tapi anehnya, rasa nyaman itu masih gampang diingat sampai sekarang.
+            </p>
+            <button class="btn-next" onclick="goToPage('page2', 'Terima kasih sudah menjadi bagian dari cerita ini.')">
+              Next Memory <span class="arrow">→</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+      <div class="corner-deco top-left">✦</div>
+      <div class="corner-deco top-right">✦</div>
+      <div class="corner-deco bottom-left">✦</div>
+      <div class="corner-deco bottom-right">✦</div>
+    </section>
+
+    <!-- ===== PAGE 2 — THE FUNNIEST MOMENTS ===== -->
+    <section class="page memory-page" id="page2">
+      <div class="page-bg page2-bg"></div>
+      <div class="page-content">
+
+        <div class="page-number">02 / 03</div>
+
+        <div class="memory-layout reverse">
+          <div class="memory-text-side">
+            <div class="memory-tag">Chapter II</div>
+            <h2 class="memory-title">"Bagian yang Selalu Bikin Senyum"</h2>
+            <div class="memory-divider">
+              <span>✦</span>
+            </div>
+            <p class="memory-body">
+              Kalau dipikir-pikir, banyak momen kita yang sebenarnya biasa aja. Tapi entah kenapa sekarang justru itu yang paling sering teringat. Candaan, obrolan random, sampai hal-hal kecil yang dulu ada, sekarang menjadi kenangan favorit.
+            </p>
+            <button class="btn-next" onclick="goToPage('page3', 'Ada kenangan yang tidak perlu sempurna untuk menjadi berharga.')">
+              Next Memory <span class="arrow">→</span>
+            </button>
+          </div>
+          <div class="memory-photo-side">
+            <div class="memory-polaroid">
+              <div class="memory-photo-frame">
+                <img src="photos/memory2.jpeg" alt="Momen Lucu" class="memory-img" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder memory-photo2\'><span class=\'photo-icon large\'>🌸</span><div class=\'photo-overlay-text\'>Momen Lucu</div></div>'" />
+              </div>
+              <p class="memory-photo-label">the funny ones ✦</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="corner-deco top-left">✦</div>
+      <div class="corner-deco top-right">✦</div>
+      <div class="corner-deco bottom-left">✦</div>
+      <div class="corner-deco bottom-right">✦</div>
+    </section>
+
+    <!-- ===== PAGE 3 — THE DAYS I MISS ===== -->
+    <section class="page memory-page" id="page3">
+      <div class="page-bg page3-bg"></div>
+      <div class="page-content">
+
+        <div class="page-number">03 / 03</div>
+
+        <div class="memory-layout">
+          <div class="memory-photo-side">
+            <div class="memory-polaroid">
+              <div class="memory-photo-frame">
+                <img src="photos/memory3.jpg" alt="Hari yang Dirindukan" class="memory-img" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder memory-photo3\'><span class=\'photo-icon large\'>✨</span><div class=\'photo-overlay-text\'>Hari yang Dirindukan</div></div>'" />
+              </div>
+              <p class="memory-photo-label">days i miss ✦</p>
+            </div>
+          </div>
+          <div class="memory-text-side">
+            <div class="memory-tag">Chapter III</div>
+            <h2 class="memory-title">"Hari-Hari yang Kadang Dirindukan"</h2>
+            <div class="memory-divider">
+              <span>✦</span>
+            </div>
+            <p class="memory-body">
+              Aku merindukan masa lalu karena rasanya ingin kembali ke sana. Aku merindukan bagaimana semuanya terasa begitu ringan saat itu. Tidak banyak yang perlu dipikirkan, cukup menikmati waktu yang berjalan bersama.
+            </p>
+            <button class="btn-next btn-final" onclick="goToPage('finalPage', 'Kalau kenangan bisa bicara, mungkin mereka juga ingin dikunjungi lagi.')">
+              One Last Page <span class="arrow">→</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+      <div class="corner-deco top-left">✦</div>
+      <div class="corner-deco top-right">✦</div>
+      <div class="corner-deco bottom-left">✦</div>
+      <div class="corner-deco bottom-right">✦</div>
+    </section>
+
+    <!-- ===== FINAL PAGE — LETTER FOR YOU ===== -->
+    <section class="page final-page" id="finalPage">
+      <div class="stars-bg" id="starsBg"></div>
+      <div class="shooting-stars-container" id="shootingStars"></div>
+      <div class="floating-photos-container" id="floatingPhotos"></div>
+
+      <div class="final-content">
+        <h2 class="final-title">"A Letter That Was Never Sent"</h2>
+
+        <div class="envelope-container" id="envelopeContainer">
+          <div class="big-envelope" id="bigEnvelope">
+            <div class="big-envelope-flap" id="bigEnvelopeFlap"></div>
+            <div class="big-envelope-body">
+              <div class="envelope-seal">💌</div>
+            </div>
+          </div>
+          <button class="btn-open-letter" id="openLetterBtn" onclick="openLetter()">
+            <span>[ Open The Letter ]</span>
+          </button>
+        </div>
+
+        <div class="letter-content" id="letterContent">
+          <div class="letter-paper" id="letterPaper">
+            <div class="letter-inner">
+              <div class="letter-header">
+                <span class="letter-date">Untuk kamu, kapan pun ini kamu baca…</span>
+                <div class="letter-line"></div>
+              </div>
+              <p class="letter-paragraph">
+                Aku tahu waktu tidak bisa diputar kembali. Aku juga tahu setiap orang akan mempunyai jalannya. Tapi aku masih berharap suatu hari nanti semesta memberi kesempatan, aku ingin mengulang beberapa kenangan itu sekali lagi.
+              </p>
+              <p class="letter-paragraph">
+                Bukan untuk mengubah apa yang telah terjadi, melainkan untuk menikmatinya sekali lagi dengan senyuman yang sama.
+              </p>
+              <p class="letter-paragraph">
+                Karena dari banyak hal yang perlahan terlupakan, kenangan tentang kita selalu punya tempat untuk pulang.
+              </p>
+              <p class="letter-paragraph">
+                Dan kalau suatu hari nanti kamu merasa lelah dengan keseharian mu, kamu boleh untuk pulang ke aku, aku akan selalu ada untuk kamu.
+              </p>
+              <p class="letter-paragraph">
+                Aku akan menyimpan semua kenangan ini dengan baik.
+              </p>
+              <div class="letter-line"></div>
+              <p class="letter-closing">
+                "Thank you for being one of my favorite memories."
+              </p>
+              <div class="letter-signature">
+                <span>— dengan tulus,</span>
+                <span class="signature-name">seseorang yang masih ingin bersama ✦</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="replay-section" id="replaySection">
+            <p class="replay-text">Terima kasih sudah membaca hingga akhir 🌸</p>
+            <button class="btn-replay" onclick="replayAlbum()">
+              <span class="replay-icon">↺</span>
+              Visit Our Memories Again
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </div><!-- end book-wrapper -->
+
+  <!-- ===== PAGE TURN EFFECT ===== -->
+  <div class="page-turn-effect" id="pageTurnEffect">
+    <div class="page-turn-inner"></div>
+  </div>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="script.js"></script>
+</body>
+</html>
